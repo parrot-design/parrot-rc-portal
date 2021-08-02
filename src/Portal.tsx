@@ -15,48 +15,18 @@ const Portal = React.forwardRef((props: IPortalProps, ref) => {
         disablePortal = false
     } = props;
 
-    const handleRef = useForkRef(React.isValidElement(children) ? (children as any).ref : null, ref)
-
-    const [mountNode, setMountNode] = useState<any>(null);
-
-    useEffect(() => {
-        if (!disablePortal) {
-            setMountNode(getContainer(container) || document.body);
-        }
-    }, [disablePortal, container]);
-
-    useEffect(() => {
-        if (mountNode && !disablePortal) { 
-            setRef(ref, mountNode);
-            return () => {
-                setRef(ref, null);
-            };
-        } 
-        return undefined;
-    }, [ref, mountNode, disablePortal]);
-
-
-    useEffect(() => {
-        if (mountNode && !disablePortal) {
-            setRef(ref, mountNode);
-            return () => {
-                setRef(ref, null);
-            };
-        }
-
-        return undefined;
-    }, [ref, mountNode, disablePortal]);
-
+    const handleRef = useForkRef(React.isValidElement(children) ? (children as any).ref : null, ref);
+  
     if (disablePortal) {
         if (React.isValidElement(children)) {
-            return React.cloneElement(children, {
-                [ref as any]: handleRef,
+            return React.cloneElement((children as any), {
+                ref: handleRef,
             });
         }
         return children;
     }
 
-    return mountNode ? ReactDOM.createPortal(children, mountNode) : mountNode;
+    return ReactDOM.createPortal(React.cloneElement(children,{ref}), getContainer(container) || document.body);
 
 });
 

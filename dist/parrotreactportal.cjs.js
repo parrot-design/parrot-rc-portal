@@ -15,39 +15,15 @@ function getContainer(container) {
 const Portal = React__default['default'].forwardRef((props, ref) => {
     const { children, container, disablePortal = false } = props;
     const handleRef = reactHooks.useForkRef(React__default['default'].isValidElement(children) ? children.ref : null, ref);
-    const [mountNode, setMountNode] = React.useState(null);
-    React.useEffect(() => {
-        if (!disablePortal) {
-            setMountNode(getContainer(container) || document.body);
-        }
-    }, [disablePortal, container]);
-    React.useEffect(() => {
-        if (mountNode && !disablePortal) {
-            reactHooks.setRef(ref, mountNode);
-            return () => {
-                reactHooks.setRef(ref, null);
-            };
-        }
-        return undefined;
-    }, [ref, mountNode, disablePortal]);
-    React.useEffect(() => {
-        if (mountNode && !disablePortal) {
-            reactHooks.setRef(ref, mountNode);
-            return () => {
-                reactHooks.setRef(ref, null);
-            };
-        }
-        return undefined;
-    }, [ref, mountNode, disablePortal]);
     if (disablePortal) {
         if (React__default['default'].isValidElement(children)) {
             return React__default['default'].cloneElement(children, {
-                [ref]: handleRef,
+                ref: handleRef,
             });
         }
         return children;
     }
-    return mountNode ? ReactDOM__default['default'].createPortal(children, mountNode) : mountNode;
+    return ReactDOM__default['default'].createPortal(React__default['default'].cloneElement(children, { ref }), getContainer(container) || document.body);
 });
 
 module.exports = Portal;

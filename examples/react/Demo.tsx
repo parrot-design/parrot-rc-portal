@@ -8,12 +8,12 @@ const Demo=()=>{
     const ref=useRef(null);
 
     useEffect(()=>{
-        console.log("Ref",ref)
-    },[ref.current])
+        console.log("Demoeffect")
+    },[])
 
     return (
         <div>
-            <Portal ref={ref}>
+            <Portal ref={ref} disablePortal>
                 <div>我在body以外</div>
             </Portal>
         </div>
