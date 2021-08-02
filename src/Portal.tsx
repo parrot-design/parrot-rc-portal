@@ -5,8 +5,7 @@ import { IPortalProps } from '.';
 
 function getContainer(container: any) {
     return typeof container === 'function' ? container() : container;
-}
-console.log("ReactDOM", ReactDOM)
+} 
 
 const Portal = React.forwardRef((props: IPortalProps, ref) => {
 

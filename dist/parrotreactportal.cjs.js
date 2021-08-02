@@ -12,7 +12,6 @@ var ReactDOM__default = /*#__PURE__*/_interopDefaultLegacy(ReactDOM);
 function getContainer(container) {
     return typeof container === 'function' ? container() : container;
 }
-console.log("ReactDOM", ReactDOM__default['default']);
 const Portal = React__default['default'].forwardRef((props, ref) => {
     const { children, container, disablePortal = false } = props;
     const handleRef = reactHooks.useForkRef(React__default['default'].isValidElement(children) ? children.ref : null, ref);

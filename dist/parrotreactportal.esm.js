@@ -5,7 +5,6 @@ import { useForkRef, setRef } from '@parrotjs/react-hooks';
 function getContainer(container) {
     return typeof container === 'function' ? container() : container;
 }
-console.log("ReactDOM", ReactDOM);
 const Portal = React.forwardRef((props, ref) => {
     const { children, container, disablePortal = false } = props;
     const handleRef = useForkRef(React.isValidElement(children) ? children.ref : null, ref);
