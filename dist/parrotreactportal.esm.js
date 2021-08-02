@@ -16,7 +16,7 @@ const Portal = React.forwardRef((props, ref) => {
         }
         return children;
     }
-    return ReactDOM.createPortal(React.cloneElement(children, { ref }), getContainer(container) || document.body);
+    return ReactDOM.createPortal(children, getContainer(container) || document.body);
 });
 
 export default Portal;

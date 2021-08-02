@@ -6,11 +6,7 @@ import "./index.css";
 const Demo=()=>{
 
     const ref=useRef(null);
-
-    useEffect(()=>{
-        console.log("Demoeffect")
-    },[])
-
+ 
     return (
         <div>
             <Portal ref={ref} disablePortal>

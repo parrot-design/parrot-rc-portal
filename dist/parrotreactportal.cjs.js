@@ -23,7 +23,7 @@ const Portal = React__default['default'].forwardRef((props, ref) => {
         }
         return children;
     }
-    return ReactDOM__default['default'].createPortal(React__default['default'].cloneElement(children, { ref }), getContainer(container) || document.body);
+    return ReactDOM__default['default'].createPortal(children, getContainer(container) || document.body);
 });
 
 module.exports = Portal;
